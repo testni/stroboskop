@@ -7,13 +7,18 @@ window.addEventListener('load', function() {
         var picker = new jscolor(input);
         picker.fromRGB(Math.floor(Math.random()*255), Math.floor(Math.random()*255), Math.floor(Math.random()*255))
         document.getElementById("barve").appendChild(input);
+       
 	}
 	
 	document.querySelector("#novaBarva") 
 		.addEventListener('click', dodajBarvo);
+	
 		
 	//Odstrani barve
-	
+	var odstraniBarve = function(event) {
+		var vseBarve = document.getElementById("barve").innerHTML = "";
+	}
+	document.querySelector("#odstraniBarve").addEventListener('click', odstraniBarve);
 	//Stroboskop
 	var vrednosti = [];
 	var minCas = 0;
@@ -34,6 +39,10 @@ window.addEventListener('load', function() {
 	
 	var stop = function(event) {
 		ustavi = true;
+		var halt = document.querySelector("#start");
+		halt.innerHTML = "Zaženi stroboskop";
+		halt.removeEventListener('click', stop);
+		halt.addEventListener('click', zagon);
 	}
 	
 	var zagon = function(event) {
@@ -44,8 +53,8 @@ window.addEventListener('load', function() {
 			vrednosti.push(barva.innerHTML);
 		}
 		
-		minCas = 1000;
-		maxCas = 1000;
+		minCas = parseInt(document.querySelector("#min").value);
+		maxCas = parseInt(document.querySelector("#max").value);
 		spremeniBarvo(0);
 		
 		var start = document.querySelector("#start");
